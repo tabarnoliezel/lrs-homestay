@@ -514,6 +514,12 @@
     
 </section>
 
+<script src="config.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase-client.js"></script>
+  
   <script>
 
 let calendarDate = new Date(2026, 7, 1);
@@ -658,12 +664,7 @@ Where Every Stay Feels Like Home.
     © 2026 LRS Homestay. All rights reserved.
 
   </footer>
-  
-<script src="config.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase-client.js"></script>
 
 <script>
 async function addBooking() {
@@ -719,7 +720,6 @@ async function addBooking() {
   document.getElementById("booking-status").value = "";
   document.getElementById("booking-notes").value = "";
 
-  loadBookings();
 }
 </script>
   

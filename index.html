@@ -420,7 +420,169 @@
   </p>
 
 </div>
+<h2 style="margin-top:40px; text-align:center;">
+  Guest Booking Inquiry
+</h2>
 
+<div style="
+  max-width:600px;
+  margin:20px auto;
+  padding:25px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:white;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+">
+
+  <p style="
+    text-align:center;
+    color:#555;
+    margin-bottom:20px;
+  ">
+    Interested in staying with us? Send us your preferred dates
+    and details, and we'll get back to you within the day.
+  </p>
+
+  <label>Full Name</label>
+  <input
+    type="text"
+    id="inquiry-name"
+    placeholder="Enter your full name"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Contact Number</label>
+  <input
+    type="tel"
+    id="inquiry-contact"
+    placeholder="Enter your contact number"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Email Address</label>
+  <input
+    type="email"
+    id="inquiry-email"
+    placeholder="Enter your email address"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Check-in Date</label>
+  <input
+    type="date"
+    id="inquiry-checkin"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Check-out Date</label>
+  <input
+    type="date"
+    id="inquiry-checkout"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Number of Guests</label>
+  <input
+    type="number"
+    id="inquiry-guests"
+    min="1"
+    placeholder="Number of guests"
+    required
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    "
+  >
+
+  <label>Additional Notes</label>
+  <textarea
+    id="inquiry-notes"
+    placeholder="Any questions or special requests?"
+    rows="4"
+    style="
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+      resize:vertical;
+    "
+  ></textarea>
+
+  <button
+    type="button"
+    onclick="submitBookingInquiry()"
+    style="
+      width:100%;
+      padding:12px;
+      border:0;
+      border-radius:6px;
+      background:#173848;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    "
+  >
+    Send Booking Inquiry
+  </button>
+
+  <p
+    id="inquiry-message"
+    style="
+      display:none;
+      margin-top:15px;
+      text-align:center;
+      color:#173848;
+      font-weight:bold;
+    "
+  ></p>
+
+</div>
   
   <section id="admin-login" class="section">
 

@@ -1051,7 +1051,66 @@ async function cancelBooking(bookingId) {
 
   loadBookings();
 }
+async function editBooking(bookingId) {
 
+  const { data, error } = await supabaseClient
+    .from("bookings")
+    .select("*")
+    .eq("id", bookingId)
+    .single();
+
+  if (error) {
+    console.error("Error loading booking:", error);
+    alert("Failed to load booking.");
+    return;
+  }
+
+  const newGuestName = prompt(
+    "Guest Name:",
+    data.guest_name
+  );
+
+  if (newGuestName === null) {
+    return;
+  }
+
+  const newCheckIn = prompt(
+    "Check-in date:",
+    data.check_in
+  );
+
+  if (newCheckIn === null) {
+    return;
+  }
+
+  const newCheckOut = prompt(
+    "Check-out date:",
+    data.check_out
+  );
+
+  if (newCheckOut === null) {
+    return;
+  }
+
+  const { error: updateError } = await supabaseClient
+    .from("bookings")
+    .update({
+      guest_name: newGuestName,
+      check_in: newCheckIn,
+      check_out: newCheckOut
+    })
+    .eq("id", bookingId);
+
+  if (updateError) {
+    console.error("Error updating booking:", updateError);
+    alert("Failed to update booking.");
+    return;
+  }
+
+  alert("Booking updated successfully!");
+
+  loadBookings();
+}
 async function deleteBooking(bookingId) {
 
   const confirmed = confirm(

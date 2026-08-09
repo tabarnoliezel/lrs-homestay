@@ -589,10 +589,14 @@ if (bookingsList) {
 ">
   ${booking.guest_name}
 </strong>
-    <br>
-    ${booking.check_in} → ${booking.check_out}
-    <br>
-
+  <div style="
+  margin-top:6px;
+  margin-bottom:10px;
+  font-size:14px;
+  color:#555;
+">
+  📅 ${booking.check_in} → ${booking.check_out}
+</div>
     Status:
     <select
       onchange="updateBookingStatus('${booking.id}', this.value)"

@@ -437,6 +437,23 @@
 
 let calendarDate = new Date(2026, 7, 1);
 
+    let bookings = [];
+
+async function loadBookings() {
+  const { data, error } = await supabaseClient
+    .from("bookings")
+    .select("check_in, check_out, booking_status");
+
+  if (error) {
+    console.error("Error loading bookings:", error);
+    return;
+  }
+
+  bookings = data || [];
+
+  loadBookings();
+}
+    
 function renderCalendar() {
 
   const monthTitle = document.getElementById("calendar-month");

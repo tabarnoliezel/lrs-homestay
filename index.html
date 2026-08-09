@@ -1292,7 +1292,85 @@ async function deleteBooking(bookingId) {
 
   loadBookings();
 }
-  
+async function submitBookingInquiry() {
+
+  const name = document.getElementById("inquiry-name").value.trim();
+  const contact = document.getElementById("inquiry-contact").value.trim();
+  const email = document.getElementById("inquiry-email").value.trim();
+  const checkIn = document.getElementById("inquiry-checkin").value;
+  const checkOut = document.getElementById("inquiry-checkout").value;
+  const guests = document.getElementById("inquiry-guests").value;
+  const notes = document.getElementById("inquiry-notes").value.trim();
+
+  const message = document.getElementById("inquiry-message");
+
+  if (!name || !contact || !email || !checkIn || !checkOut || !guests) {
+    message.style.display = "block";
+    message.style.color = "#b33a3a";
+    message.textContent = "Please complete all required fields.";
+    return;
+  }
+
+  if (checkOut <= checkIn) {
+    message.style.display = "block";
+    message.style.color = "#b33a3a";
+    message.textContent = "Check-out date must be after check-in date.";
+    return;
+  }
+
+  message.style.display = "block";
+  message.style.color = "#173848";
+  message.textContent = "Sending your inquiry...";
+
+  try {
+
+    const response = await fetch("/api/send-inquiry", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        name,
+        contact,
+        email,
+        checkIn,
+        checkOut,
+        guests,
+        notes
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to send inquiry.");
+    }
+
+    message.style.display = "block";
+    message.style.color = "#173848";
+    message.textContent =
+      "Your booking inquiry has been received! Please wait for our response within the day.";
+
+    document.getElementById("inquiry-name").value = "";
+    document.getElementById("inquiry-contact").value = "";
+    document.getElementById("inquiry-email").value = "";
+    document.getElementById("inquiry-checkin").value = "";
+    document.getElementById("inquiry-checkout").value = "";
+    document.getElementById("inquiry-guests").value = "";
+    document.getElementById("inquiry-notes").value = "";
+
+  } catch (error) {
+
+    console.error("Inquiry error:", error);
+
+    message.style.display = "block";
+    message.style.color = "#b33a3a";
+    message.textContent =
+      "We couldn't send your inquiry right now. Please try again.";
+  }
+}  
 </script>
   
 <script>

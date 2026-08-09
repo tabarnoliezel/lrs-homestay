@@ -1067,6 +1067,7 @@ if (window.location.hash === "#admin-dashboard") {
 }
 </script>
      
+<script>
 async function adminLogout() {
 
   const { error } = await supabaseClient.auth.signOut();
@@ -1080,7 +1081,7 @@ async function adminLogout() {
 
 }
 </script>
-
+     
 <footer>
   <strong>LRS HOMESTAY</strong>
   <br>

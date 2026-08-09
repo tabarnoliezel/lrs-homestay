@@ -1073,18 +1073,6 @@ if (window.location.hash === "#admin-dashboard") {
      
 <script>
 async function adminLogout() {
-
-  const { error } = await supabaseClient.auth.signOut();
-
-  if (error) {
-    alert("Logout failed. Please try again.");
-    return;
-  }
-
-  document.getElementById("admin-dashboard").style.display = "none";
-  window.location.href = "#admin-login";
-
-}
   const { error } = await supabaseClient.auth.signOut();
 
   if (error) {

@@ -1271,6 +1271,63 @@ function renderGuestCalendar() {
 
   for (let day = 1; day <= daysInMonth; day++) {
 
+  const booked = isGuestDateBooked(year, month, day);
+
+  const background = booked
+    ? "#ffdede"
+    : "#e8f7e8";
+
+  const statusText = booked
+    ? "BOOKED"
+    : "AVAILABLE";
+
+  const statusColor = booked
+    ? "#c0392b"
+    : "#27833a";
+
+  html += `
+    <div style="
+      min-height:75px;
+      padding:10px 6px;
+      box-sizing:border-box;
+      border-radius:8px;
+      background:${background};
+      border:1px solid #ddd;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      text-align:center;
+    ">
+
+      <div style="
+        display:block;
+        width:100%;
+        color:#173848 !important;
+        font-size:18px;
+        font-weight:700;
+        line-height:24px;
+        margin-bottom:6px;
+      ">
+        ${day}
+      </div>
+
+      <div style="
+        display:block;
+        width:100%;
+        color:${statusColor} !important;
+        font-size:11px;
+        font-weight:700;
+        line-height:16px;
+      ">
+        ${statusText}
+      </div>
+
+    </div>
+  `;
+
+}
+
     const booked = isGuestDateBooked(year, month, day);
 
     const background = booked

@@ -617,6 +617,21 @@ if (bookingsList) {
 >
   Cancel Booking
 </button>
+
+<button
+  onclick="deleteBooking('${booking.id}')"
+  style="
+    margin-top:10px;
+    margin-left:5px;
+    padding:8px 12px;
+    border:0;
+    border-radius:6px;
+    cursor:pointer;
+  "
+>
+  Delete Booking
+</button>
+
   </div>
 `).join("");
 
@@ -845,6 +860,32 @@ async function cancelBooking(bookingId) {
   loadBookings();
 }
 
+async function deleteBooking(bookingId) {
+
+  const confirmed = confirm(
+    "Are you sure you want to permanently delete this booking?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error("Error deleting booking:", error);
+    alert("Failed to delete booking.");
+    return;
+  }
+
+  alert("Booking deleted successfully!");
+
+  loadBookings();
+}
+  
 </script>
   
 <script>

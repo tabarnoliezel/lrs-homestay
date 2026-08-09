@@ -1079,6 +1079,17 @@ async function adminLogout() {
     return;
   }
 
+  document.getElementById("admin-dashboard").style.display = "none";
+  window.location.href = "#admin-login";
+
+}
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("Logout failed. Please try again.");
+    return;
+  }
+
   window.location.href = "#admin-login";
 
 }

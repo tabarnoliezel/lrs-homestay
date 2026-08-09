@@ -694,15 +694,15 @@ async function addBooking() {
     .from("bookings")
     .insert([
       {
-     guest_name: guest,
-  "contact number": contactNumber,
-  check_in: checkIn,
-  check_out: checkOut,
-  total_amount: totalAmount || null,
-  payment_status: paymentStatus || null,
-  booking_status: bookingStatus,
-  notes: notes || null
-    
+        guest_name: guest,
+        "contact number": contactNumber,
+        check_in: checkIn,
+        check_out: checkOut,
+        total_amount: totalAmount || null,
+        payment_status: paymentStatus || null,
+        booking_status: bookingStatus,
+        notes: notes || null
+      }
     ]);
 
   if (error) {
@@ -724,8 +724,9 @@ async function addBooking() {
 
   loadBookings();
 }
-</script>
 
+</script>
+  
 <script>
 async function adminLogin() {
 

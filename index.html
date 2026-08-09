@@ -309,12 +309,14 @@
       style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
     >
 
-    <button
-      class="button primary"
-      style="border:0; cursor:pointer;"
-    >
-      Login
-    </button>
+   <button
+  onclick="adminLogin()"
+  class="button primary"
+  style="border:0; cursor:pointer;"
+>
+  Login
+</button>
+    
 
   </div>
 
@@ -338,5 +340,26 @@
 
 <script src="supabase-client.js"></script>
 
+  <script>
+async function adminLogin() {
+
+  const email = document.getElementById("admin-email").value;
+  const password = document.getElementById("admin-password").value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert("Login failed. Please check your email and password.");
+    return;
+  }
+
+  alert("Login successful!");
+
+}
+</script>
+  
 </body>
 </html>

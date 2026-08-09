@@ -541,7 +541,7 @@ let calendarDate = new Date(2026, 7, 1);
 async function loadBookings() {
   const { data, error } = await supabaseClient
     .from("bookings")
-    .select("check_in, check_out, booking_status");
+    .select("guest_name, contact_number, check_in, check_out, total_amount, payment_status, booking_status, notes");
 
   if (error) {
     console.error("Error loading bookings:", error);
@@ -550,6 +550,37 @@ async function loadBookings() {
 
   bookings = data || [];
 
+  const bookingsList = document.getElementById("bookings-list");
+
+if (bookingsList) {
+
+  if (bookings.length === 0) {
+    bookingsList.innerHTML = "<p>No bookings found.</p>";
+  } else {
+
+    bookingsList.innerHTML = bookings.map(booking => `
+      <div style="
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:15px;
+        margin-bottom:10px;
+        text-align:left;
+      ">
+        <strong>${booking.guest_name}</strong>
+        <br>
+        ${booking.check_in} → ${booking.check_out}
+        <br>
+        Status: ${booking.booking_status}
+        <br>
+        Payment: ${booking.payment_status || "Not specified"}
+        <br>
+        Amount: ${booking.total_amount || "Not specified"}
+      </div>
+    `).join("");
+
+  }
+}
+  
   renderCalendar();
 }
     

@@ -1002,8 +1002,6 @@ const password = document.getElementById("admin-password").value;
 
 let email = username;
 
-  
-
 if (username.toLowerCase() === "admin1") {
   email = "tabarnoliezel@gmail.com";
 }
@@ -1011,6 +1009,7 @@ if (username.toLowerCase() === "admin1") {
 if (username.toLowerCase() === "admin2") {
   email = "rafraf0613@gmail.com";
 }
+  
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email: email,
     password: password
@@ -1048,6 +1047,30 @@ if (username.toLowerCase() === "admin2") {
 </script>
 
 <script>
+
+<script>
+async function protectAdminDashboard() {
+
+  const { data } = await supabaseClient.auth.getSession();
+
+  if (!data.session) {
+    window.location.href = "#admin-login";
+  }
+}
+
+window.addEventListener("hashchange", function () {
+
+  if (window.location.hash === "#admin-dashboard") {
+    protectAdminDashboard();
+  }
+
+});
+
+if (window.location.hash === "#admin-dashboard") {
+  protectAdminDashboard();
+}
+</script>
+     
 async function adminLogout() {
 
   const { error } = await supabaseClient.auth.signOut();

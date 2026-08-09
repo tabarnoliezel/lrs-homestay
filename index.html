@@ -803,6 +803,7 @@ async function updateBookingStatus(bookingId, newStatus) {
 
   loadBookings();
 }
+</script>
   
 <script>
 async function adminLogin() {
@@ -823,6 +824,27 @@ async function adminLogin() {
   window.location.href = "#admin-dashboard";
 
 }
+
+  async function updatePaymentStatus(bookingId, newPaymentStatus) {
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .update({
+      payment_status: newPaymentStatus
+    })
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error("Error updating payment status:", error);
+    alert("Failed to update payment status.");
+    return;
+  }
+
+  alert("Payment status updated successfully!");
+
+  loadBookings();
+}
+  
 </script>
 
 <script>

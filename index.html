@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LRS Homestay | Where Every Stay Feels Like Home</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f4ee;
+      color: #202b35;
+      line-height: 1.6;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+        linear-gradient(135deg, #102532, #183f52);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .logo-mark {
+      font-family: Georgia, serif;
+      font-size: 72px;
+      letter-spacing: 12px;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+    .homestay {
+      color: #e5bd72;
+      letter-spacing: 8px;
+      font-size: 19px;
+      margin-bottom: 30px;
+    }
+
+    .wave {
+      font-size: 38px;
+      color: #55bde8;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 6vw, 62px);
+      font-weight: normal;
+      margin-bottom: 18px;
+    }
+
+    .tagline {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 20px;
+      color: #f1e8d8;
+      margin-bottom: 38px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .primary {
+      background: #dcae5d;
+      color: #17232c;
+    }
+
+    .secondary {
+      border: 1px solid white;
+      color: white;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .section-intro {
+      max-width: 650px;
+      margin: 0 auto 40px;
+      color: #65717a;
+    }
+
+    .cards {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 22px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    .card-icon {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-family: Georgia, serif;
+      font-size: 21px;
+    }
+
+    .card p {
+      color: #68737a;
+      font-size: 15px;
+    }
+
+    .cta {
+      background: #173848;
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+      color: #dbe5e9;
+    }
+
+    footer {
+      background: #0d202a;
+      color: #aebcc2;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .logo-mark {
+        font-size: 54px;
+      }
+
+      .homestay {
+        font-size: 15px;
+        letter-spacing: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+
+      <div class="wave">〰</div>
+
+      <div class="logo-mark">LRS</div>
+
+      <div class="homestay">H O M E S T A Y</div>
+
+      <h1>Where Every Stay Feels Like Home.</h1>
+
+      <p class="tagline">
+        Your cozy place to relax, unwind, and make memories.
+      </p>
+
+      <div class="buttons">
+        <a href="#availability" class="button primary">
+          Check Availability
+        </a>
+
+        <a href="#about" class="button secondary">
+          About LRS Homestay
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section" id="about">
+
+    <h2>Welcome to LRS Homestay</h2>
+
+    <p class="section-intro">
+      A comfortable and cozy stay at Shore Residences,
+      created to give you a place where you can relax,
+      enjoy your time, and feel right at home.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🏡</div>
+        <h3>Feel at Home</h3>
+        <p>
+          A cozy space designed for comfortable stays
+          with family, friends, or loved ones.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <h3>Great Location</h3>
+        <p>
+          Conveniently located at Shore Residences,
+          perfect for staycations and trips around Manila.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <h3>Easy & Comfortable</h3>
+        <p>
+          Enjoy a simple, relaxing stay with everything
+          you need for a memorable visit.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="cta" id="availability">
+
+    <h2>Ready for Your Stay?</h2>
+
+    <p>
+      Check our availability and plan your next stay with LRS Homestay.
+    </p>
+
+    <a href="#" class="button primary">
+      View Booking Calendar
+    </a>
+
+  </section>
+
+
+  <footer>
+
+    <strong>LRS HOMESTAY</strong>
+    <br>
+
+    Where Every Stay Feels Like Home.
+    <br><br>
+
+    © 2026 LRS Homestay. All rights reserved.
+
+  </footer>
+
+</body>
+</html>

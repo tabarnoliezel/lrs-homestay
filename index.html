@@ -559,24 +559,39 @@ if (bookingsList) {
   } else {
 
     bookingsList.innerHTML = bookings.map(booking => `
-      <div style="
-        border:1px solid #ddd;
-        border-radius:10px;
-        padding:15px;
-        margin-bottom:10px;
-        text-align:left;
-      ">
-        <strong>${booking.guest_name}</strong>
-        <br>
-        ${booking.check_in} → ${booking.check_out}
-        <br>
-        Status: ${booking.booking_status}
-        <br>
-        Payment: ${booking.payment_status || "Not specified"}
-        <br>
-        Amount: ${booking.total_amount || "Not specified"}
-      </div>
-    `).join("");
+  <div style="
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:10px;
+    text-align:left;
+  ">
+    <strong>${booking.guest_name}</strong>
+    <br>
+    ${booking.check_in} → ${booking.check_out}
+    <br>
+
+    Status:
+    <select
+      onchange="updateBookingStatus('${booking.id}', this.value)"
+      style="
+        padding:6px;
+        border-radius:6px;
+        margin-top:5px;
+      "
+    >
+      <option value="Pending" ${booking.booking_status === "Pending" ? "selected" : ""}>Pending</option>
+      <option value="Confirmed" ${booking.booking_status === "Confirmed" ? "selected" : ""}>Confirmed</option>
+      <option value="Completed" ${booking.booking_status === "Completed" ? "selected" : ""}>Completed</option>
+      <option value="Cancelled" ${booking.booking_status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+    </select>
+
+    <br>
+    Payment: ${booking.payment_status || "Not specified"}
+    <br>
+    Amount: ${booking.total_amount || "Not specified"}
+  </div>
+`).join("");
 
   }
 }

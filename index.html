@@ -627,8 +627,15 @@ if (bookingsList) {
   <option value="Paid" ${booking.payment_status === "Paid" ? "selected" : ""}>Paid</option>
 </select>
 
-    <br>
-    Amount: ${booking.total_amount || "Not specified"}
+  <div style="
+  margin-top:10px;
+  font-size:15px;
+  font-weight:bold;
+  color:#173848;
+">
+  Amount: ₱${booking.total_amount || "Not specified"}
+</div>
+
 
 <br>
 <button

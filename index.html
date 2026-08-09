@@ -541,7 +541,7 @@ let calendarDate = new Date(2026, 7, 1);
 async function loadBookings() {
   const { data, error } = await supabaseClient
     .from("bookings")
-    .select("guest_name, contact_number, check_in, check_out, total_amount, payment_status, booking_status, notes");
+    .select("id, guest_name, contact_number, check_in, check_out, total_amount, payment_status, booking_status, notes");
 
   if (error) {
     console.error("Error loading bookings:", error);
@@ -770,6 +770,26 @@ async function addBooking() {
 
 }
 </script>
+
+async function updateBookingStatus(bookingId, newStatus) {
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .update({
+      booking_status: newStatus
+    })
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error("Error updating booking status:", error);
+    alert("Failed to update booking status.");
+    return;
+  }
+
+  alert("Booking status updated successfully!");
+
+  loadBookings();
+}
   
 <script>
 async function adminLogin() {

@@ -322,6 +322,54 @@
 
 </section>
 
+  <section id="admin-dashboard" class="section">
+
+  <h2>LRS Homestay Admin Dashboard</h2>
+
+  <p class="section-intro">
+    Welcome to your booking management dashboard.
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <h3>Booking Calendar</h3>
+      <p>
+        View your upcoming reservations and availability.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">➕</div>
+      <h3>Add Booking</h3>
+      <p>
+        Add a new guest reservation to your calendar.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>Manage Bookings</h3>
+      <p>
+        View and update your existing reservations.
+      </p>
+    </div>
+
+  </div>
+
+  <br>
+
+  <button
+    onclick="adminLogout()"
+    class="button primary"
+    style="border:0; cursor:pointer;"
+  >
+    Logout
+  </button>
+
+</section>
+  
   <footer>
 
     <strong>LRS HOMESTAY</strong>
@@ -356,7 +404,7 @@ async function adminLogin() {
     return;
   }
 
-  alert("Login successful!");
+  window.location.href = "#admin-dashboard";
 
 }
 </script>

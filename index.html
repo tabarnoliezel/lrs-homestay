@@ -604,7 +604,20 @@ if (bookingsList) {
     <br>
     Amount: ${booking.total_amount || "Not specified"}
 
-    <br>
+<br>
+<button
+  onclick="cancelBooking('${booking.id}')"
+  style="
+    margin-top:10px;
+    padding:8px 12px;
+    border:0;
+    border-radius:6px;
+    cursor:pointer;
+  "
+>
+  Cancel Booking
+</button>
+
 <button
   onclick="cancelBooking('${booking.id}')"
   style="
@@ -818,6 +831,34 @@ async function updateBookingStatus(bookingId, newStatus) {
   loadBookings();
 }
 </script>
+
+async function cancelBooking(bookingId) {
+
+  const confirmed = confirm(
+    "Are you sure you want to cancel this booking?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .update({
+      booking_status: "Cancelled"
+    })
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error("Error cancelling booking:", error);
+    alert("Failed to cancel booking.");
+    return;
+  }
+
+  alert("Booking cancelled successfully!");
+
+  loadBookings();
+}
   
 <script>
 async function adminLogin() {

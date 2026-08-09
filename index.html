@@ -501,15 +501,23 @@
     gap:5px;
   ">
 
-    <div><strong>Sun</strong></div>
-    <div><strong>Mon</strong></div>
-    <div><strong>Tue</strong></div>
-    <div><strong>Wed</strong></div>
-    <div><strong>Thu</strong></div>
-    <div><strong>Fri</strong></div>
-    <div><strong>Sat</strong></div>
+<div><strong>Sun</strong></div>
+<div><strong>Mon</strong></div>
+<div><strong>Tue</strong></div>
+<div><strong>Wed</strong></div>
+<div><strong>Thu</strong></div>
+<div><strong>Fri</strong></div>
+<div><strong>Sat</strong></div>
 
-  </div>
+<div
+  id="calendar-days"
+  style="
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:8px;
+    margin-top:8px;
+  "
+></div>
 
   <div
     id="calendar-days"

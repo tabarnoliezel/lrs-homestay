@@ -603,6 +603,21 @@ if (bookingsList) {
 
     <br>
     Amount: ${booking.total_amount || "Not specified"}
+
+    <br>
+<button
+  onclick="cancelBooking('${booking.id}')"
+  style="
+    margin-top:10px;
+    padding:8px 12px;
+    border:0;
+    border-radius:6px;
+    cursor:pointer;
+  "
+>
+  Cancel Booking
+</button>
+
   </div>
 `).join("");
 

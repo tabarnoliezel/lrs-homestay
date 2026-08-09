@@ -1091,14 +1091,22 @@ async function editBooking(bookingId) {
   if (newCheckOut === null) {
     return;
   }
+const newNotes = prompt(
+  "Additional Notes:",
+  data.additional_notes || ""
+);
 
+if (newNotes === null) {
+  return;
+}
   const { error: updateError } = await supabaseClient
     .from("bookings")
     .update({
-      guest_name: newGuestName,
-      check_in: newCheckIn,
-      check_out: newCheckOut
-    })
+  guest_name: newGuestName,
+  check_in: newCheckIn,
+  check_out: newCheckOut,
+  additional_notes: newNotes
+})
     .eq("id", bookingId);
 
   if (updateError) {

@@ -1324,29 +1324,27 @@ async function submitBookingInquiry() {
 
   try {
 
-    const response = await fetch("/api/send-inquiry", {
-      method: "POST",
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbyJR2pcRelHkwWCoXpaf-5E3he5ssKQPvN2MeD0mDJccjZvehBodIoa9bVxLZGfVVlM/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
 
-      body: JSON.stringify({
-        name,
-        contact,
-        email,
-        checkIn,
-        checkOut,
-        guests,
-        notes
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to send inquiry.");
-    }
+        body: JSON.stringify({
+          name: name,
+          contact: contact,
+          email: email,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: guests,
+          notes: notes
+        })
+      }
+    );
 
     message.style.display = "block";
     message.style.color = "#173848";
@@ -1370,7 +1368,7 @@ async function submitBookingInquiry() {
     message.textContent =
       "We couldn't send your inquiry right now. Please try again.";
   }
-}  
+}
 </script>
   
 <script>

@@ -587,7 +587,20 @@ if (bookingsList) {
     </select>
 
     <br>
-    Payment: ${booking.payment_status || "Not specified"}
+    Payment:
+<select
+  onchange="updatePaymentStatus('${booking.id}', this.value)"
+  style="
+    padding:6px;
+    border-radius:6px;
+    margin-top:5px;
+  "
+>
+  <option value="Unpaid" ${booking.payment_status === "Unpaid" ? "selected" : ""}>Unpaid</option>
+  <option value="Partial" ${booking.payment_status === "Partial" ? "selected" : ""}>Partial</option>
+  <option value="Paid" ${booking.payment_status === "Paid" ? "selected" : ""}>Paid</option>
+</select>
+
     <br>
     Amount: ${booking.total_amount || "Not specified"}
   </div>

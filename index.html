@@ -495,6 +495,11 @@ function renderCalendar() {
 
     const currentDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
+    const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const isPastDate = new Date(year, month, day) < today;
+    
 const isBooked = bookings.some(booking => {
 
   if (!booking.check_in || !booking.check_out) {
@@ -509,7 +514,7 @@ const isBooked = bookings.some(booking => {
 
 });
 
-if (isBooked) {
+if (isBooked || isPastDate) {
 
   dayBox.innerHTML = `
     <strong>${day}</strong>

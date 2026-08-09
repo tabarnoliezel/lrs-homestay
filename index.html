@@ -1133,6 +1133,120 @@ async function adminLogout() {
 
 }
 </script>
+
+<script>
+
+let guestCalendarDate = new Date();
+
+function renderGuestCalendar() {
+
+  const calendar = document.getElementById("guest-calendar");
+  const monthTitle = document.getElementById("guest-calendar-month");
+
+  if (!calendar || !monthTitle) return;
+
+  const year = guestCalendarDate.getFullYear();
+  const month = guestCalendarDate.getMonth();
+
+  const monthName = guestCalendarDate.toLocaleString("default", {
+    month: "long"
+  });
+
+  monthTitle.textContent = `${monthName} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = "";
+
+  html += `
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(7, 1fr);
+      gap:8px;
+      text-align:center;
+    ">
+  `;
+
+  const weekdays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ];
+
+  weekdays.forEach(day => {
+
+    html += `
+      <div style="
+        font-weight:bold;
+        padding:8px;
+        color:#173848;
+      ">
+        ${day}
+      </div>
+    `;
+
+  });
+
+  for (let i = 0; i < firstDay; i++) {
+
+    html += `<div></div>`;
+
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+
+    html += `
+      <div style="
+        padding:12px 5px;
+        border-radius:8px;
+        background:#e8f7e8;
+        color:#173848;
+        font-weight:600;
+      ">
+        ${day}
+      </div>
+    `;
+
+  }
+
+  html += `</div>`;
+
+  calendar.innerHTML = html;
+
+}
+
+function previousGuestMonth() {
+
+  guestCalendarDate.setMonth(
+    guestCalendarDate.getMonth() - 1
+  );
+
+  renderGuestCalendar();
+
+}
+
+function nextGuestMonth() {
+
+  guestCalendarDate.setMonth(
+    guestCalendarDate.getMonth() + 1
+  );
+
+  renderGuestCalendar();
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  renderGuestCalendar();
+
+});
+
+</script>
      
 <footer>
   <strong>LRS HOMESTAY</strong>

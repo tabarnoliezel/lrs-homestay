@@ -273,20 +273,60 @@
 
   <section class="cta" id="availability">
 
-   </div>
+   <section class="cta" id="availability">
 
-<h2>Ready for Your Stay?</h2>
-    
-    <p>
-      Check our availability and plan your next stay with LRS Homestay.
+  <h2>Check Our Availability</h2>
+
+  <p>
+    View available dates and plan your next stay with LRS Homestay.
+  </p>
+
+  <div style="
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-top:20px;
+  ">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    ">
+
+      <button
+        onclick="previousGuestMonth()"
+        class="button secondary"
+        style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+      >
+        ← Previous
+      </button>
+
+      <h3 id="guest-calendar-month" style="margin:0;">
+        August 2026
+      </h3>
+
+      <button
+        onclick="nextGuestMonth()"
+        class="button secondary"
+        style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+      >
+        Next →
+      </button>
+
+    </div>
+
+    <div id="guest-calendar"></div>
+
+    <p style="margin-top:20px; text-align:center;">
+      🟢 Available &nbsp;&nbsp; 🔴 Booked
     </p>
 
-    <a href="#availability" class="button primary">
-      View Booking Calendar
-    </a>
+  </div>
 
-  </section>
-
+</section>
+    
 <h2 style="margin-top:40px; text-align:center;">Our Rates</h2>
 
 <div style="

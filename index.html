@@ -408,6 +408,21 @@ async function adminLogin() {
 
 }
 </script>
+
+  <script>
+async function adminLogout() {
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("Logout failed. Please try again.");
+    return;
+  }
+
+  window.location.href = "#admin-login";
+
+}
+</script>
   
 </body>
 </html>

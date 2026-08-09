@@ -493,16 +493,51 @@ function renderCalendar() {
     dayBox.style.padding = "8px";
     dayBox.style.textAlign = "left";
 
-    dayBox.innerHTML = `
-      <strong>${day}</strong>
-      <div style="
-        margin-top:10px;
-        font-size:12px;
-        color:#438a58;
-      ">
-        AVAILABLE
-      </div>
-    `;
+    const currentDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+const isBooked = bookings.some(booking => {
+
+  if (!booking.check_in || !booking.check_out) {
+    return false;
+  }
+
+  return (
+    currentDate >= booking.check_in &&
+    currentDate < booking.check_out &&
+    booking.booking_status !== "Cancelled"
+  );
+
+});
+
+if (isBooked) {
+
+  dayBox.innerHTML = `
+    <strong>${day}</strong>
+    <div style="
+      margin-top:10px;
+      font-size:12px;
+      color:#c0392b;
+      font-weight:bold;
+    ">
+      BOOKED
+    </div>
+  `;
+
+} else {
+
+  dayBox.innerHTML = `
+    <strong>${day}</strong>
+    <div style="
+      margin-top:10px;
+      font-size:12px;
+      color:#438a58;
+      font-weight:bold;
+    ">
+      AVAILABLE
+    </div>
+  `;
+
+}
 
     daysContainer.appendChild(dayBox);
   }

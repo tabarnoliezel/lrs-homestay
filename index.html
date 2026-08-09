@@ -793,17 +793,35 @@ if (bookingsList) {
 </button>
 
 <button
-  onclick="deleteBooking('${booking.id}')"
-  style="
-    margin-top:10px;
-    margin-left:5px;
-    padding:8px 12px;
-    border:0;
-    border-radius:6px;
-    cursor:pointer;
-  "
+onclick="editBooking('${booking.id}')"
+style="
+margin-top:10px;
+padding:8px 12px;
+border:0;
+border-radius:6px;
+cursor:pointer;
+background:#173848;
+color:white;
+"
 >
-  Delete Booking
+Edit Booking
+</button>
+
+<button
+onclick="deleteBooking('${booking.id}')"
+style="
+margin-top:10px;
+margin-left:5px;
+padding:8px 12px;
+border:0;
+border-radius:6px;
+cursor:pointer;
+background:#b33a3a;
+color:white;
+"
+>
+Delete Booking
+</button>
 </button>
 
   </div>

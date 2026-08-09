@@ -437,7 +437,7 @@
 
 let calendarDate = new Date(2026, 7, 1);
 
-function renderCalendar() {
+async function renderCalendar() {
 
   const monthTitle = document.getElementById("calendar-month");
   const daysContainer = document.getElementById("calendar-days");
@@ -452,6 +452,15 @@ function renderCalendar() {
   monthTitle.textContent = `${monthName} ${year}`;
 
   daysContainer.innerHTML = "";
+
+  // Get bookings from Supabase
+  const { data: bookings, error } = await supabaseClient
+    .from("bookings")
+    .select("check_in, check_out, booking_status");
+
+  if (error) {
+    console.error("Error loading bookings:", error);
+  }
 
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -475,17 +484,56 @@ function renderCalendar() {
     dayBox.style.borderRadius = "8px";
     dayBox.style.padding = "8px";
     dayBox.style.textAlign = "left";
+    dayBox.style.cursor = "pointer";
 
-    dayBox.innerHTML = `
-      <strong>${day}</strong>
-      <div style="
-        margin-top:10px;
-        font-size:12px;
-        color:#438a58;
-      ">
-        AVAILABLE
-      </div>
-    `;
+    const currentDate = new Date(year, month, day);
+    const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+    const isBooked = (bookings || []).some(booking => {
+
+      if (!booking.check_in || !booking.check_out) {
+        return false;
+      }
+
+      const checkIn = booking.check_in;
+      const checkOut = booking.check_out;
+
+      return (
+        dateString >= checkIn &&
+        dateString < checkOut &&
+        booking.booking_status !== "Cancelled"
+      );
+    });
+
+    if (isBooked) {
+
+      dayBox.innerHTML = `
+        <strong>${day}</strong>
+        <div style="
+          margin-top:10px;
+          font-size:12px;
+          color:#c0392b;
+          font-weight:bold;
+        ">
+          BOOKED
+        </div>
+      `;
+
+    } else {
+
+      dayBox.innerHTML = `
+        <strong>${day}</strong>
+        <div style="
+          margin-top:10px;
+          font-size:12px;
+          color:#438a58;
+          font-weight:bold;
+        ">
+          AVAILABLE
+        </div>
+      `;
+
+    }
 
     daysContainer.appendChild(dayBox);
   }

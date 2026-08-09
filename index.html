@@ -452,7 +452,7 @@
     Logout
   </button>
 
-    <div id="booking-calendar" style="max-width: 900px; margin: 50px auto 0;">
+   <div id="booking-calendar" style="max-width: 900px; margin: 50px auto 0;">
 
   <h2 style="margin-bottom: 25px;">
     Booking Calendar
@@ -464,6 +464,7 @@
     justify-content:space-between;
     margin-bottom:20px;
   ">
+
     <button
       onclick="previousMonth()"
       class="button secondary"
@@ -481,6 +482,7 @@
     >
       Next →
     </button>
+
   </div>
 
   <div style="
@@ -531,7 +533,6 @@ async function loadBookings() {
   bookings = data || [];
 
   renderCalendar();
-  loadBookings();
 }
     
 function renderCalendar() {

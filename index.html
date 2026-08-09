@@ -1137,6 +1137,47 @@ async function adminLogout() {
 <script>
 
 let guestCalendarDate = new Date();
+let guestBookedRanges = [];
+
+async function loadGuestBookings() {
+
+  const { data, error } = await supabaseClient
+    .from("booking_availability")
+    .select("check_in, check_out");
+
+  if (error) {
+    console.error("Guest availability error:", error);
+    guestBookedRanges = [];
+    renderGuestCalendar();
+    return;
+  }
+
+  guestBookedRanges = data || [];
+
+  renderGuestCalendar();
+}
+
+
+function isGuestDateBooked(year, month, day) {
+
+  const currentDate = new Date(year, month, day);
+
+  currentDate.setHours(0, 0, 0, 0);
+
+  return guestBookedRanges.some(booking => {
+
+    const checkIn = new Date(booking.check_in);
+    const checkOut = new Date(booking.check_out);
+
+    checkIn.setHours(0, 0, 0, 0);
+    checkOut.setHours(0, 0, 0, 0);
+
+    return currentDate >= checkIn && currentDate < checkOut;
+
+  });
+
+}
+
 
 function renderGuestCalendar() {
 
@@ -1192,23 +1233,42 @@ function renderGuestCalendar() {
 
   });
 
+
   for (let i = 0; i < firstDay; i++) {
 
     html += `<div></div>`;
 
   }
 
+
   for (let day = 1; day <= daysInMonth; day++) {
+
+    const booked = isGuestDateBooked(year, month, day);
+
+    const background = booked
+      ? "#ffdede"
+      : "#e8f7e8";
+
+    const statusText = booked
+      ? "Booked"
+      : "Available";
 
     html += `
       <div style="
         padding:12px 5px;
         border-radius:8px;
-        background:#e8f7e8;
+        background:${background};
         color:#173848;
         font-weight:600;
       ">
-        ${day}
+        <div>${day}</div>
+        <div style="
+          font-size:11px;
+          margin-top:4px;
+          font-weight:500;
+        ">
+          ${statusText}
+        </div>
       </div>
     `;
 
@@ -1220,6 +1280,7 @@ function renderGuestCalendar() {
 
 }
 
+
 function previousGuestMonth() {
 
   guestCalendarDate.setMonth(
@@ -1229,6 +1290,7 @@ function previousGuestMonth() {
   renderGuestCalendar();
 
 }
+
 
 function nextGuestMonth() {
 
@@ -1240,9 +1302,10 @@ function nextGuestMonth() {
 
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
 
-  renderGuestCalendar();
+  loadGuestBookings();
 
 });
 

@@ -340,13 +340,97 @@
       </p>
     </div>
 
-    <div class="card">
-      <div class="card-icon">➕</div>
-      <h3>Add Booking</h3>
-      <p>
-        Add a new guest reservation to your calendar.
-      </p>
-    </div>
+  <div class="card" style="grid-column: 1 / -1;">
+
+  <div class="card-icon">➕</div>
+
+  <h3>Add Booking</h3>
+
+  <p>
+    Add a new guest reservation to your calendar.
+  </p>
+
+  <div style="margin-top:20px;">
+
+    <input
+      id="booking-guest"
+      type="text"
+      placeholder="Guest name"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+
+    <input
+      id="booking-contact"
+      type="text"
+      placeholder="Contact number"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+
+    <label style="display:block; margin-bottom:6px;">
+      Check In
+    </label>
+
+    <input
+      id="booking-check-in"
+      type="date"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+
+    <label style="display:block; margin-bottom:6px;">
+      Check Out
+    </label>
+
+    <input
+      id="booking-check-out"
+      type="date"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+
+    <input
+      id="booking-total"
+      type="number"
+      placeholder="Total amount"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+
+    <select
+      id="booking-payment-status"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+      <option value="">Payment Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Partial">Partial</option>
+      <option value="Paid">Paid</option>
+    </select>
+
+    <select
+      id="booking-status"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    >
+      <option value="">Booking Status</option>
+      <option value="Confirmed">Confirmed</option>
+      <option value="Pending">Pending</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+
+    <textarea
+      id="booking-notes"
+      placeholder="Notes"
+      rows="4"
+      style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px;"
+    ></textarea>
+
+    <button
+      onclick="addBooking()"
+      class="button primary"
+      style="border:0; cursor:pointer;"
+    >
+      Save Booking
+    </button>
+
+  </div>
+
+</div>
 
     <div class="card">
       <div class="card-icon">📋</div>
@@ -585,6 +669,66 @@ renderCalendar();
 <script src="supabase-client.js"></script>
 
   <script>
+
+    <script>
+async function addBooking() {
+
+  const guest = document.getElementById("booking-guest").value.trim();
+  const contactNumber = document.getElementById("booking-contact").value.trim();
+  const checkIn = document.getElementById("booking-check-in").value;
+  const checkOut = document.getElementById("booking-check-out").value;
+  const totalAmount = document.getElementById("booking-total").value;
+  const paymentStatus = document.getElementById("booking-payment-status").value;
+  const bookingStatus = document.getElementById("booking-status").value;
+  const notes = document.getElementById("booking-notes").value.trim();
+
+  if (!guest || !checkIn || !checkOut || !bookingStatus) {
+    alert("Please complete the guest name, check-in, check-out, and booking status.");
+    return;
+  }
+
+  if (checkOut <= checkIn) {
+    alert("Check-out must be after check-in.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .insert([
+      {
+        guest: guest,
+        contact_number: contactNumber,
+        check_in: checkIn,
+        check_out: checkOut,
+        total_amount: totalAmount || null,
+        payment_status: paymentStatus || null,
+        booking_status: bookingStatus,
+        notes: notes || null
+      }
+    ]);
+
+  if (error) {
+    console.error("Booking error:", error);
+    alert("Booking could not be saved. Please check the browser console.");
+    return;
+  }
+
+  alert("Booking saved successfully!");
+
+  document.getElementById("booking-guest").value = "";
+  document.getElementById("booking-contact").value = "";
+  document.getElementById("booking-check-in").value = "";
+  document.getElementById("booking-check-out").value = "";
+  document.getElementById("booking-total").value = "";
+  document.getElementById("booking-payment-status").value = "";
+  document.getElementById("booking-status").value = "";
+  document.getElementById("booking-notes").value = "";
+
+  loadBookings();
+}
+</script>
+
+<script>
 async function adminLogin() {
 
   const email = document.getElementById("admin-email").value;
@@ -605,7 +749,7 @@ async function adminLogin() {
 }
 </script>
 
-  <script>
+<script>
 async function adminLogout() {
 
   const { error } = await supabaseClient.auth.signOut();
@@ -619,6 +763,6 @@ async function adminLogout() {
 
 }
 </script>
-  
+
 </body>
 </html>

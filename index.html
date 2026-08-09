@@ -473,19 +473,27 @@
       ← Previous
     </button>
 
-    <h3 id="calendar-month">
-      August 2026
-    </h3>
+   <h3 id="calendar-month">
+  August 2026
+</h3>
 
-    <button
-      onclick="nextMonth()"
-      class="button secondary"
-      style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
-    >
-      Next →
-    </button>
+<button
+  onclick="nextMonth()"
+  class="button secondary"
+  style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+>
+  Next →
+</button>
 
-  </div>
+<div
+  id="calendar-days"
+  style="
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:8px;
+    margin-top:15px;
+  "
+></div>
 
   <div style="
     display:grid;

@@ -1018,8 +1018,8 @@ if (username.toLowerCase() === "admin2") {
     return;
   }
 
-  window.location.href = "#admin-dashboard";
-
+document.getElementById("admin-dashboard").style.display = "block";
+window.location.href = "#admin-dashboard";
 }
 
   async function updatePaymentStatus(bookingId, newPaymentStatus) {

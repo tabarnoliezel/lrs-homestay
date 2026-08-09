@@ -368,7 +368,146 @@
     Logout
   </button>
 
+    <div id="booking-calendar" style="max-width: 900px; margin: 50px auto 0;">
+
+  <h2 style="margin-bottom: 25px;">
+    Booking Calendar
+  </h2>
+
+  <div style="
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+  ">
+
+    <button
+      onclick="previousMonth()"
+      class="button secondary"
+      style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+    >
+      ← Previous
+    </button>
+
+    <h3 id="calendar-month">
+      August 2026
+    </h3>
+
+    <button
+      onclick="nextMonth()"
+      class="button secondary"
+      style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+    >
+      Next →
+    </button>
+
+  </div>
+
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:5px;
+  ">
+
+    <div><strong>Sun</strong></div>
+    <div><strong>Mon</strong></div>
+    <div><strong>Tue</strong></div>
+    <div><strong>Wed</strong></div>
+    <div><strong>Thu</strong></div>
+    <div><strong>Fri</strong></div>
+    <div><strong>Sat</strong></div>
+
+  </div>
+
+  <div
+    id="calendar-days"
+    style="
+      display:grid;
+      grid-template-columns:repeat(7, 1fr);
+      gap:5px;
+      margin-top:5px;
+    "
+  ></div>
+
+</div>
+    
 </section>
+
+  <script>
+
+let calendarDate = new Date(2026, 7, 1);
+
+function renderCalendar() {
+
+  const monthTitle = document.getElementById("calendar-month");
+  const daysContainer = document.getElementById("calendar-days");
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+
+  const monthName = calendarDate.toLocaleString("default", {
+    month: "long"
+  });
+
+  monthTitle.textContent = `${monthName} ${year}`;
+
+  daysContainer.innerHTML = "";
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+
+    const emptyDay = document.createElement("div");
+
+    emptyDay.style.minHeight = "80px";
+
+    daysContainer.appendChild(emptyDay);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+
+    const dayBox = document.createElement("div");
+
+    dayBox.style.minHeight = "80px";
+    dayBox.style.background = "white";
+    dayBox.style.border = "1px solid #ddd";
+    dayBox.style.borderRadius = "8px";
+    dayBox.style.padding = "8px";
+    dayBox.style.textAlign = "left";
+
+    dayBox.innerHTML = `
+      <strong>${day}</strong>
+      <div style="
+        margin-top:10px;
+        font-size:12px;
+        color:#438a58;
+      ">
+        AVAILABLE
+      </div>
+    `;
+
+    daysContainer.appendChild(dayBox);
+  }
+}
+
+function previousMonth() {
+
+  calendarDate.setMonth(calendarDate.getMonth() - 1);
+
+  renderCalendar();
+}
+
+function nextMonth() {
+
+  calendarDate.setMonth(calendarDate.getMonth() + 1);
+
+  renderCalendar();
+}
+
+renderCalendar();
+
+</script>
   
   <footer>
 

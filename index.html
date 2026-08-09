@@ -464,7 +464,6 @@
     justify-content:space-between;
     margin-bottom:20px;
   ">
-
     <button
       onclick="previousMonth()"
       class="button secondary"
@@ -473,59 +472,39 @@
       ← Previous
     </button>
 
-   <h3 id="calendar-month">
-  August 2026
-</h3>
+    <h3 id="calendar-month">August 2026</h3>
 
-<button
-  onclick="nextMonth()"
-  class="button secondary"
-  style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
->
-  Next →
-</button>
-
-<div
-  id="calendar-days"
-  style="
-    display:grid;
-    grid-template-columns:repeat(7, 1fr);
-    gap:8px;
-    margin-top:15px;
-  "
-></div>
+    <button
+      onclick="nextMonth()"
+      class="button secondary"
+      style="border:1px solid #173848; color:#173848; background:white; cursor:pointer;"
+    >
+      Next →
+    </button>
+  </div>
 
   <div style="
     display:grid;
     grid-template-columns:repeat(7, 1fr);
-    gap:5px;
-  ">
-
-<div><strong>Sun</strong></div>
-<div><strong>Mon</strong></div>
-<div><strong>Tue</strong></div>
-<div><strong>Wed</strong></div>
-<div><strong>Thu</strong></div>
-<div><strong>Fri</strong></div>
-<div><strong>Sat</strong></div>
-
-<div
-  id="calendar-days"
-  style="
-    display:grid;
-    grid-template-columns:repeat(7, 1fr);
     gap:8px;
-    margin-top:8px;
-  "
-></div>
+    margin-bottom:8px;
+    text-align:center;
+  ">
+    <div><strong>Sun</strong></div>
+    <div><strong>Mon</strong></div>
+    <div><strong>Tue</strong></div>
+    <div><strong>Wed</strong></div>
+    <div><strong>Thu</strong></div>
+    <div><strong>Fri</strong></div>
+    <div><strong>Sat</strong></div>
+  </div>
 
   <div
     id="calendar-days"
     style="
       display:grid;
       grid-template-columns:repeat(7, 1fr);
-      gap:5px;
-      margin-top:5px;
+      gap:8px;
     "
   ></div>
 
@@ -648,17 +627,6 @@ if (isBooked || isPastDate) {
     daysContainer.appendChild(dayBox);
   }
 }
-    
-function previousMonth() {
-
-  calendarDate.setMonth(calendarDate.getMonth() - 1);
-
-  renderCalendar();
-}
-
-</script>
-  
-function nextMonth() {
 
 <script>
 

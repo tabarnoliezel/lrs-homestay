@@ -660,6 +660,17 @@ function previousMonth() {
   
 function nextMonth() {
 
+<script>
+
+function previousMonth() {
+
+  calendarDate.setMonth(calendarDate.getMonth() - 1);
+
+  renderCalendar();
+}
+
+function nextMonth() {
+
   calendarDate.setMonth(calendarDate.getMonth() + 1);
 
   renderCalendar();
@@ -668,13 +679,11 @@ function nextMonth() {
 loadBookings();
 
 </script>
-  
-  <footer>
 
-    <strong>LRS HOMESTAY</strong>
-    <br>
+<strong>LRS HOMESTAY</strong>
+<br>
 
-    Where Every Stay Feels Like Home.
+Where Every Stay Feels Like Home.
     <br><br>
 
     © 2026 LRS Homestay. All rights reserved.

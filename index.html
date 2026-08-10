@@ -1608,6 +1608,86 @@ async function addFinancialTransaction() {
 
   loadFinancialTransactions();
 }
+  async function editFinancialTransaction(transactionId) {
+
+  const { data, error } = await supabaseClient
+    .from("financial_transactions")
+    .select("*")
+    .eq("id", transactionId)
+    .single();
+
+  if (error) {
+    console.error("Error loading transaction:", error);
+    alert("Failed to load transaction.");
+    return;
+  }
+
+  const newDate = prompt(
+    "Transaction Date:",
+    data.transaction_date
+  );
+
+  if (newDate === null) {
+    return;
+  }
+
+  const newType = prompt(
+    "Type (Credit or Debit):",
+    data.type
+  );
+
+  if (newType === null) {
+    return;
+  }
+
+  const newTag = prompt(
+    "Category:",
+    data.tag
+  );
+
+  if (newTag === null) {
+    return;
+  }
+
+  const newDescription = prompt(
+    "Description:",
+    data.description || ""
+  );
+
+  if (newDescription === null) {
+    return;
+  }
+
+  const newAmount = prompt(
+    "Amount:",
+    data.amount
+  );
+
+  if (newAmount === null) {
+    return;
+  }
+
+  const { error: updateError } = await supabaseClient
+    .from("financial_transactions")
+    .update({
+      transaction_date: newDate,
+      type: newType,
+      tag: newTag,
+      description: newDescription || null,
+      amount: Number(newAmount)
+    })
+    .eq("id", transactionId);
+
+  if (updateError) {
+    console.error("Error updating transaction:", updateError);
+    alert("Failed to update transaction.");
+    return;
+  }
+
+  alert("Financial transaction updated successfully!");
+
+  loadFinancialTransactions();
+}
   
 </script>
   

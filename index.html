@@ -1361,6 +1361,21 @@ async function submitBookingInquiry() {
       "We couldn't send your inquiry right now. Please try again.";
   }
 }
+
+async function loadFinancialTransactions() {
+  const { data, error } = await supabaseClient
+    .from("financial_transactions")
+    .select("*")
+    .order("transaction_date", { ascending: false });
+
+  if (error) {
+    console.error("Error loading financial transactions:", error);
+    return;
+  }
+
+  console.log("Financial transactions:", data);
+}
+  
 </script>
   
 <script>

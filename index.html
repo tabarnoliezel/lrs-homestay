@@ -1455,20 +1455,54 @@ if (list) {
     list.innerHTML = "No financial transactions found.";
   } else {
     list.innerHTML = data.map(transaction => `
-      <div style="
-        padding:12px;
-        border-bottom:1px solid #eee;
-      ">
-        <strong>${transaction.type}</strong>
-        — ${transaction.tag}
-        — ₱${Number(transaction.amount).toLocaleString()}
-        <br>
-        <small>
-          ${transaction.transaction_date}
-          ${transaction.description ? " • " + transaction.description : ""}
-        </small>
-      </div>
-    `).join("");
+  <div style="
+    padding:14px;
+    border-bottom:1px solid #eee;
+    margin-bottom:8px;
+  ">
+
+    <strong>${transaction.type}</strong>
+    — ${transaction.tag}
+    — ₱${Number(transaction.amount).toLocaleString()}
+
+    <br>
+
+    <small>
+      ${transaction.transaction_date}
+      ${transaction.description ? " • " + transaction.description : ""}
+    </small>
+
+    <div style="margin-top:10px;">
+
+      <button
+        onclick="editFinancialTransaction('${transaction.id}')"
+        style="
+          border:0;
+          border-radius:6px;
+          cursor:pointer;
+          padding:6px 12px;
+          margin-right:6px;
+        "
+      >
+        ✏️ Edit
+      </button>
+
+      <button
+        onclick="deleteFinancialTransaction('${transaction.id}')"
+        style="
+          border:0;
+          border-radius:6px;
+          cursor:pointer;
+          padding:6px 12px;
+        "
+      >
+        🗑️ Delete
+      </button>
+
+    </div>
+
+  </div>
+`).join("");
   }
 }
 }

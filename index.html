@@ -1472,6 +1472,47 @@ if (list) {
   }
 }
 }
+async function addFinancialTransaction() {
+
+  const date = document.getElementById("financial-date").value;
+  const type = document.getElementById("financial-type").value;
+  const tag = document.getElementById("financial-tag").value;
+  const description = document.getElementById("financial-description").value.trim();
+  const amount = document.getElementById("financial-amount").value;
+
+  if (!date || !type || !tag || !amount) {
+    alert("Please complete the date, type, category, and amount.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("financial_transactions")
+    .insert([
+      {
+        transaction_date: date,
+        type: type,
+        tag: tag,
+        description: description || null,
+        amount: Number(amount)
+      }
+    ]);
+
+  if (error) {
+    console.error("Financial transaction error:", error);
+    alert("Transaction could not be saved. Please check the browser console.");
+    return;
+  }
+
+  alert("Financial transaction saved successfully!");
+
+  document.getElementById("financial-date").value = "";
+  document.getElementById("financial-type").value = "";
+  document.getElementById("financial-tag").value = "";
+  document.getElementById("financial-description").value = "";
+  document.getElementById("financial-amount").value = "";
+
+  loadFinancialTransactions();
+}
   
 </script>
   

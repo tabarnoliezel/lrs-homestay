@@ -1528,10 +1528,13 @@ if (list) {
 
     <br>
 
-    <small>
-      ${transaction.transaction_date}
-      ${transaction.description ? " • " + transaction.description : ""}
-    </small>
+   <small>
+  ${transaction.transaction_date
+    ? transaction.transaction_date.substring(0, 10)
+    : ""}
+  ${transaction.description ? " • " + transaction.description : ""}
+</small>
+
 
     <div style="margin-top:10px;">
 

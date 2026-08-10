@@ -1847,7 +1847,31 @@ if (window.location.hash === "#admin-dashboard") {
   loadFinancialTransactions();
 }
 }
+async function deleteFinancialTransaction(transactionId) {
 
+  const confirmed = confirm(
+    "Are you sure you want to delete this financial transaction?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("financial_transactions")
+    .delete()
+    .eq("id", transactionId);
+
+  if (error) {
+    console.error("Error deleting financial transaction:", error);
+    alert("Failed to delete financial transaction.");
+    return;
+  }
+
+  alert("Financial transaction deleted successfully!");
+
+  loadFinancialTransactions();
+}
   
 </script>
      

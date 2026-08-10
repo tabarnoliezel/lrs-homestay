@@ -1477,9 +1477,11 @@ async function protectAdminDashboard() {
 
   if (!data.session) {
     window.location.href = "#admin-login";
+    return;
   }
-}
 
+  loadFinancialTransactions();
+}
 window.addEventListener("hashchange", function () {
 
   if (window.location.hash === "#admin-dashboard") {

@@ -743,7 +743,66 @@
   <p>
     Track income and expenses for LRS Homestay.
   </p>
+<div style="margin-top:20px;">
 
+  <h4>Add Financial Transaction</h4>
+
+  <input
+    id="financial-date"
+    type="date"
+    style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;"
+  >
+
+  <select
+    id="financial-type"
+    style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;"
+  >
+    <option value="">Select Type</option>
+    <option value="Credit">Credit / Revenue</option>
+    <option value="Debit">Debit / Expense</option>
+  </select>
+
+  <select
+    id="financial-tag"
+    style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;"
+  >
+    <option value="">Select Category</option>
+    <option value="Booking">Booking</option>
+    <option value="Electricity">Electricity</option>
+    <option value="Water">Water</option>
+    <option value="Supplies">Supplies</option>
+    <option value="Cleaning">Cleaning</option>
+    <option value="Maintenance">Maintenance</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <input
+    id="financial-description"
+    type="text"
+    placeholder="Description"
+    style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;"
+  >
+
+  <input
+    id="financial-amount"
+    type="number"
+    placeholder="Amount"
+    min="0"
+    step="0.01"
+    style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;"
+  >
+
+  <button
+    onclick="addFinancialTransaction()"
+    class="button primary"
+    style="border:0; cursor:pointer;"
+  >
+    Save Transaction
+  </button>
+
+</div>
+
+<br>
   <div id="financial-transactions-list" style="margin-top:20px;">
     Loading financial transactions...
   </div>

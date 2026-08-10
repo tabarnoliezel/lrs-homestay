@@ -1389,7 +1389,29 @@ async function loadFinancialTransactions() {
     return;
   }
 
-  console.log("Financial transactions:", data);
+  const list = document.getElementById("financial-transactions-list");
+
+if (list) {
+  if (!data || data.length === 0) {
+    list.innerHTML = "No financial transactions found.";
+  } else {
+    list.innerHTML = data.map(transaction => `
+      <div style="
+        padding:12px;
+        border-bottom:1px solid #eee;
+      ">
+        <strong>${transaction.type}</strong>
+        — ${transaction.tag}
+        — ₱${Number(transaction.amount).toLocaleString()}
+        <br>
+        <small>
+          ${transaction.transaction_date}
+          ${transaction.description ? " • " + transaction.description : ""}
+        </small>
+      </div>
+    `).join("");
+  }
+}
 }
   
 </script>

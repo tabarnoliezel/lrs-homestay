@@ -318,10 +318,12 @@
 
     <div style="
       display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    ">
+    justify-content:space-between;
+  gap:8px;
+  margin-bottom:20px;
+  width:100%;
+  box-sizing:border-box;
+">
 
       <button
         onclick="previousGuestMonth()"
@@ -864,8 +866,17 @@
       ← Previous
     </button>
 
-    <h3 id="calendar-month">August 2026</h3>
-
+<h3
+  id="calendar-month"
+  style="
+    margin:0;
+    text-align:center;
+    font-size:18px;
+    white-space:nowrap;
+  "
+>
+  August 2026
+</h3>
     <button
       onclick="nextMonth()"
       class="button secondary"
@@ -892,14 +903,19 @@
     <div><strong>Sat</strong></div>
   </div>
 
-  <div
-    id="calendar-days"
-    style="
-      display:grid;
-      grid-template-columns:repeat(7, 1fr);
-      gap:8px;
-    "
-  ></div>
+<div
+  id="calendar-days"
+  style="
+    display:grid;
+    grid-template-columns:repeat(7, minmax(0, 1fr));
+    gap:4px;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  "
+>
+  
+</div>
 
 <div style="
   width:100%;

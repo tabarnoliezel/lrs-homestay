@@ -1473,7 +1473,42 @@ async function loadFinancialTransactions() {
     console.error("Error loading financial transactions:", error);
     return;
   }
+let totalRevenue = 0;
+let totalExpenses = 0;
 
+data.forEach(transaction => {
+
+  const amount = Number(transaction.amount) || 0;
+
+  if (transaction.type === "Credit") {
+    totalRevenue += amount;
+  }
+
+  if (transaction.type === "Debit") {
+    totalExpenses += amount;
+  }
+
+});
+
+const netIncome = totalRevenue - totalExpenses;
+
+document.getElementById("total-revenue").textContent =
+  `₱${totalRevenue.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+
+document.getElementById("total-expenses").textContent =
+  `₱${totalExpenses.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+
+document.getElementById("net-income").textContent =
+  `₱${netIncome.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
   const list = document.getElementById("financial-transactions-list");
 
 if (list) {

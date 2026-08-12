@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>LRS Homestay Guest Feedback</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #173848;
+    }
+
+    .feedback-container {
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .feedback-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #173848;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 5px 0;
+      color: #173848;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 18px;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .rating {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      font-size: 34px;
+      cursor: pointer;
+      margin: 0;
+      color: #ccc;
+    }
+
+    .rating input:checked ~ label {
+      color: #f2b84b;
+    }
+
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: #f2b84b;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #173848;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      padding: 25px;
+      color: #173848;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #777;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="feedback-container">
+
+  <div class="feedback-card">
+
+    <div class="logo">LRS</div>
+
+    <h1>Guest Feedback</h1>
+
+    <p class="subtitle">
+      Thank you for staying with us!
+      Your feedback helps LRS Homestay improve.
+    </p>
+
+    <form onsubmit="submitFeedback(event)">
+
+      <label>Your Name (Optional)</label>
+
+      <input
+        type="text"
+        id="guest-name"
+        placeholder="Enter your name"
+      >
+
+      <label>How was your stay?</label>
+
+      <div class="rating">
+
+        <input type="radio" id="star5" name="rating" value="5" required>
+        <label for="star5">★</label>
+
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4">★</label>
+
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3">★</label>
+
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2">★</label>
+
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1">★</label>
+
+      </div>
+
+      <label>Cleanliness</label>
+
+      <select id="cleanliness" required>
+        <option value="">Please select</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Fair</option>
+        <option>Needs Improvement</option>
+      </select>
+
+      <label>Comfort</label>
+
+      <select id="comfort" required>
+        <option value="">Please select</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Fair</option>
+        <option>Needs Improvement</option>
+      </select>
+
+      <label>Communication</label>
+
+      <select id="communication" required>
+        <option value="">Please select</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Fair</option>
+        <option>Needs Improvement</option>
+      </select>
+
+      <label>Location</label>
+
+      <select id="location" required>
+        <option value="">Please select</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Fair</option>
+        <option>Needs Improvement</option>
+      </select>
+
+      <label>What did you like about your stay?</label>
+
+      <textarea
+        id="liked"
+        placeholder="Tell us what you enjoyed..."
+      ></textarea>
+
+      <label>What can we improve?</label>
+
+      <textarea
+        id="improve"
+        placeholder="Your suggestions are welcome..."
+      ></textarea>
+
+      <label>Would you recommend LRS Homestay?</label>
+
+      <select id="recommend" required>
+        <option value="">Please select</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+
+      <button type="submit">
+        Submit Feedback
+      </button>
+
+    </form>
+
+    <div class="thank-you" id="thank-you">
+
+      ❤️ Thank you for your feedback!
+
+      <br><br>
+
+      We truly appreciate you choosing
+      <strong>LRS Homestay</strong>.
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    LRS HOMESTAY<br>
+    Shore Residence, Pasay City<br>
+    09936500113 / 09753376288<br>
+    lrshomestay@gmail.com
+  </div>
+
+</div>
+
+<script>
+
+function submitFeedback(event) {
+
+  event.preventDefault();
+
+  document.querySelector("form").style.display = "none";
+
+  document.getElementById("thank-you").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

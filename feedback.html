@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -133,7 +135,19 @@
       line-height: 1.6;
     }
   </style>
-</head>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabaseUrl = "https://nqaufdiqwnjqeetdzahg.supabase.co";
+const supabaseKey = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+  const supabaseClient = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+  );
+</script>
+  </head>
 
 <body>
 
@@ -273,12 +287,43 @@
 
 <script>
 
-function submitFeedback(event) {
+async function submitFeedback(event) {
 
   event.preventDefault();
 
-  document.querySelector("form").style.display = "none";
+  const name = document.getElementById("guest-name").value;
+  const rating = document.querySelector('input[name="rating"]:checked').value;
+  const cleanliness = document.getElementById("cleanliness").value;
+  const comfort = document.getElementById("comfort").value;
+  const communication = document.getElementById("communication").value;
+  const location = document.getElementById("location").value;
+  const liked = document.getElementById("liked").value;
+  const improve = document.getElementById("improve").value;
+  const recommend = document.getElementById("recommend").value;
 
+  const { data, error } = await supabaseClient
+    .from("guest_feedback")
+    .insert([
+      {
+        guest_name: name,
+        rating: Number(rating),
+        cleanliness: cleanliness,
+        comfort: comfort,
+        communication: communication,
+        location: location,
+        liked: liked,
+        improve: improve,
+        recommend: recommend
+      }
+    ]);
+
+  if (error) {
+    alert("Sorry, we couldn't submit your feedback. Please try again.");
+    console.error(error);
+    return;
+  }
+
+  document.querySelector("form").style.display = "none";
   document.getElementById("thank-you").style.display = "block";
 
 }

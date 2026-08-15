@@ -2154,8 +2154,8 @@ let guestBookedRanges = [];
 async function loadGuestBookings() {
 
   const { data, error } = await supabaseClient
-    .from("booking_availability")
-    .select("check_in, check_out");
+    .from("bookings")
+.select("check_in, check_out, booking_status");
 
   if (error) {
     console.error("Guest availability error:", error);

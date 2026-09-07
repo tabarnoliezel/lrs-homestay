@@ -2568,21 +2568,22 @@ async function loadGuestBookings() {
 
 function isGuestDateBooked(year, month, day) {
 
-  const currentDate = new Date(year, month, day);
-  currentDate.setHours(0, 0, 0, 0);
+  const currentDate =
+    `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
   return guestBookedRanges.some(booking => {
 
-    const checkIn = new Date(booking.check_in);
-    const checkOut = new Date(booking.check_out);
+    if (!booking.check_in || !booking.check_out) return false;
 
-    checkIn.setHours(0, 0, 0, 0);
-    checkOut.setHours(0, 0, 0, 0);
+    if (booking.booking_status === "Cancelled") return false;
+
+    const checkIn = String(booking.check_in).substring(0, 10);
+    const checkOut = String(booking.check_out).substring(0, 10);
 
     return currentDate >= checkIn && currentDate < checkOut;
 
   });
-
+}
 }
 
 function renderGuestCalendar() {

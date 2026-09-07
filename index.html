@@ -2562,8 +2562,9 @@ async function loadGuestBookings() {
     return;
   }
 
-  guestBookedRanges = data || [];
-  renderGuestCalendar();
+  console.log("GUEST BOOKINGS:", data);
+guestBookedRanges = data || [];
+renderGuestCalendar();
 }
 
 function isGuestDateBooked(year, month, day) {
